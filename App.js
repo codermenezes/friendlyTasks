@@ -1,112 +1,179 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React from 'react';
-import type {Node} from 'react';
+import React, {useState, useEffect, useRef} from "react";
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
   View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  Keyboard
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import Login from './src/components/Login';
+import TaskList from './src/components/TaskList';
+import firebase from './src/services/firebaseConnection';
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
+export default function App() {
+  const [user, setUser] = useState(null);
+  const [newTask, setNewTask] = useState('');
+  const [tasks, setTasks] = useState([]);
+  const inputRef = useRef(null);
+  const [key, setKey] = useState('');
+
+  useEffect(() => {
+    function getUser() {
+      if (!user) {
+        return;
+      }
+      firebase.database().ref('tasks').child(user).once('value', (snapshot) => {
+        setTasks([]);
+        snapshot?.forEach((chilItem) => {
+          let data = {
+            key: chilItem.key,
+            name: chilItem.val().name
+          }
+          setTasks(oldTasks => [...oldTasks, data])
+        })
+      })
+    }
+    getUser();
+  },[user])
+
+  function handleAdd() {
+    if (newTask === '') {
+      return;
+    }
+
+    if (key !== '') {
+      firebase.database().ref('tasks').child(user).child(key).update({
+        name: newTask
+      })
+        .then(() => {
+          console.log('updated task.')
+          const taskIndex = tasks.findIndex((item) => item.key === key)
+          const taskClone = tasks;
+          taskClone[taskIndex].name = newTask
+          setTasks([...taskClone])
+        })
+      Keyboard.dismiss();
+      setNewTask('');
+      setKey('');
+      return;
+    }
+
+    let tasksToDb = firebase.database().ref('tasks').child(user);
+    let keyUid = tasksToDb.push().key;
+
+    tasksToDb.child(keyUid).set({
+      name: newTask
+    })
+      .then(() => {
+        const data = {
+          key: keyUid,
+          name: newTask
+        };
+        setTasks(oldTasks => [...oldTasks, data])
+      })
+    Keyboard.dismiss();
+    setNewTask('');
+  }
+
+
+  function handleDelete(key) {
+    firebase.database().ref('tasks').child(user).child(key).remove()
+      .then(() => {
+        const findTasks = tasks.filter(item => item.key !== key)
+        setTasks(findTasks)
+    })
+  }
+
+  function hendleEdit(data) {
+    setKey(data.key)
+    setNewTask(data.name)
+    inputRef.current.focus();
+  }
+
+  if (!user) {
+    return <Login changeStatus={ (user)=>setUser(user)}/>
+  }
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.textHeader}>Friendly tasks</Text>
+      </View>
+      <View style={styles.task}>
+        <TextInput
+          style={styles.input}
+          placeholder="News friendly task..."
+          onChangeText={(text) => setNewTask(text)}
+          value={newTask}
+          ref={inputRef}
+        />
+        <TouchableOpacity
+          style={styles.buttonAdd}
+          onPress={handleAdd}
+        >
+          <Text style={styles.buttonText}>+</Text>
+        </TouchableOpacity>
+      </View>
 
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+      <FlatList
+        data={tasks}
+        keyExtractor={item => item.key}
+        renderItem={({ item })=>(
+          <TaskList
+            data={item}
+            deleteItem={handleDelete}
+            editItem={hendleEdit}
+          />
+        )}
+      />
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    marginTop: 20,
+    paddingHorizontal: 10
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  header: {
+    marginHorizontal: 10,
+    marginBottom: 15,
+    padding: 20
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  textHeader: {
+    textAlign: 'center',
+    fontSize: 30,
+    color: '#3ea6f5',
+    fontWeight: '700'
   },
-  highlight: {
-    fontWeight: '700',
+  task: {
+    flexDirection: 'row'
   },
-});
-
-export default App;
+  input: {
+    flex: 1,
+    marginBottom: 10,
+    padding: 10,
+    backgroundColor: '#FFF',
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#141414',
+    height: 45,
+  },
+  buttonAdd: {
+    backgroundColor: '#141414',
+    height: 45,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 5,
+    paddingHorizontal: 14,
+  borderRadius: 4
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 22
+  }
+})
