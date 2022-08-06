@@ -3,8 +3,8 @@ import 'firebase/auth';
 import 'firebase/database';
 
 let firebaseConfig = {
-  apiKey: "AIzaSyDUrB6ZmKzvR9Jfz_z_wjQQ-3caEKmxuvI",
-  authDomain: "friendlytasks-cbf7f.firebaseapp.com",
+  apiKey: `${process.env.REACT_APP_API_KEY}`,
+  authDomain: `${process.env.REACT_APP_AUTH_DOMAIN}`,
   projectId: "friendlytasks-cbf7f",
   storageBucket: "friendlytasks-cbf7f.appspot.com",
   messagingSenderId: "435128127859",
