@@ -1,10 +1,11 @@
 import firebase from "firebase/app";
 import 'firebase/auth';
 import 'firebase/database';
+import { REACT_APP_API_KEY, REACT_APP_AUTH_DOMAIN } from "@env";
 
 let firebaseConfig = {
-  apiKey: "AIzaSyDUrB6ZmKzvR9Jfz_z_wjQQ-3caEKmxuvI",
-  authDomain: "friendlytasks-cbf7f.firebaseapp.com",
+  apiKey: REACT_APP_API_KEY,
+  authDomain: REACT_APP_AUTH_DOMAIN,
   projectId: "friendlytasks-cbf7f",
   storageBucket: "friendlytasks-cbf7f.appspot.com",
   messagingSenderId: "435128127859",
