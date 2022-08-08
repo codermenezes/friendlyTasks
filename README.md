@@ -3,14 +3,14 @@
 
 # Sobre o projeto
 
-https://codermenezes.netlify.app
+https://codermenezes.netlify.app (em breve)
 
 friendlyTasks é um app mobile construído com o objetivo principal de praticar e desenvolver as habilidades de auto gerenciamento e melhoria contínua.
 
 O app consiste em um to do list inspirado no método Bullet Jornal(https://bulletjournal.com/) e tem como objetivo facilitar o processo de write down. 
 
 ## Layout mobile
-![Mobile Register](https://github.com/codermenezes/friendlyTasks/blob/main/assets/telaRegister.jpeg) ![Mobile Login](https://github.com/codermenezes/friendlyTasks/blob/main/assets/telaLogin.jpeg) ![Mobile Home](https://github.com/codermenezes/friendlyTasks/blob/main/assets/telaApp.jpeg)
+![Mobile Register](https://github.com/codermenezes/friendlyTasks/blob/main/assets/telaRegister.jpeg) ![Mobile Login](https://github.com/codermenezes/friendlyTasks/blob/main/assets/telaLogin.jpeg) ![Mobile Home](https://github.com/codermenezes/friendlyTasks/blob/main/assets/telaHome.jpeg)
 
 ## Front end
 - HTML / CSS / JS
