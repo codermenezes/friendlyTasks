@@ -5,7 +5,7 @@
 
 ![QRCode](https://github.com/codermenezes/friendlyTasks/blob/main/assets/friendlyTasksqrcode.png)
 
-friendlyTasks é um app mobile construído com o objetivo principal de praticar e desenvolver as habilidades de auto gerenciamento e melhoria contínua.
+friendlyTasks é um app mobile construído com o objetivo principal de praticar e desenvolver as habilidades de auto gerenciamento e melhoria contínua. Utilizando da técnica de (write down) anotar de forma simples e finalizar a tarefa exluindo a mesma da lista de afazeres. 
 
 O app consiste em um to do list inspirado no método Bullet Jornal(https://bulletjournal.com/) e tem como objetivo facilitar o processo de write down. 
 
