@@ -15,7 +15,7 @@ export default function TaskList({data, deleteItem, editItem}){
         <TouchableWithoutFeedback
           onPress={() => editItem(data)}
         >
-          <Text style={{color:"#fff", paddingRight: 10}}>{data.name}</Text>
+          <Text style={{color:"#fff", paddingRight: 10, width: 350}}>{data.name}</Text>
         </TouchableWithoutFeedback>
     </View>
   </View>
@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 10,
     padding: 10,
-    borderRadius: 4
+    borderRadius: 4,
+  },
+  btn: {
+    flex: 1,
+    flexDirection: 'row',
   }
 })
