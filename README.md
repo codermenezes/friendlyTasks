@@ -44,11 +44,10 @@ npx react-native run-android
 ```
 
 ## Pré-requisitos:
-npm / yarn
-nodeJS v18.4.0 ou superior
-Python 2.7 ou superior
-openjdk version "11.0.15" ou superior
-
+- npm / yarn
+- nodeJS v18.4.0 ou superior
+- Python 2.7 ou superior
+- openjdk version "11.0.15" ou superior
 
 # Autor
 
