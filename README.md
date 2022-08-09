@@ -37,6 +37,17 @@ cd friendlyTasks
 npm install
 # executar o projeto
 npx react-native run-android
+
+# em src/services configurar o arquivo firebaseConnection.js com suas credenciais de firebaseConfig:
+let firebaseConfig = {
+  apiKey: REACT_APP_API_KEY,
+  authDomain: REACT_APP_AUTH_DOMAIN,
+  projectId: "xxx-xxx",
+  storageBucket: "xxx-xxx",
+  messagingSenderId: "xxx-xxx",
+  appId: "xxx-xxx",
+  measurementId: "xxx-xxx"
+};
 ```
 
 ## Pré-requisitos:
@@ -45,9 +56,9 @@ npx react-native run-android
 - Python 2.7 ou superior
 - openjdk version "11.0.15" ou superior
 
-# Autor
+## Dúvidas e ou feedbacks:
 
-Sérgio Menezes
-
+# Sérgio Menezes
+codermenezes@gmail.com
 https://www.linkedin.com/in/codermenezes/
 
