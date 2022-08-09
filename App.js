@@ -136,13 +136,14 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    backgroundColor: '#f2f6fc'
   },
   header: {
     marginHorizontal: 10,
     marginBottom: 15,
-    padding: 20
+    padding: 20,
+    marginTop: 20
   },
   textHeader: {
     textAlign: 'center',
