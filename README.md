@@ -26,10 +26,9 @@ O app consiste em um to do list inspirado no método Bullet Jornal(https://bulle
 - Front end web: Netlify
 - Banco de dados: Realtime Database NoSQL
 
-# Como executar o projeto
+# Como executar o projeto localmente
 
-## Back end
-x
+### Native
 
 ```bash
 # clonar repositório
@@ -41,11 +40,15 @@ cd friendlyTasks
 # instalar as dependencias
 npm install
 # executar o projeto
-npm react-native run-android
+npx react-native run-android
 ```
 
 ## Pré-requisitos:
 npm / yarn
+nodeJS v18.4.0 ou superior
+Python 2.7 ou superior
+openjdk version "11.0.15" ou superior
+
 
 # Autor
 
