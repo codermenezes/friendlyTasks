@@ -59,6 +59,6 @@ let firebaseConfig = {
 ## Dúvidas e ou feedbacks:
 
 # Sérgio Menezes
-codermenezes@gmail.com
-https://www.linkedin.com/in/codermenezes/
+> codermenezes@gmail.com
+> https://www.linkedin.com/in/codermenezes/
 
