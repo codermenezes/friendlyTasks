@@ -3,7 +3,7 @@
 
 # Sobre o projeto
 
-https://codermenezes.netlify.app (em breve)
+![QRCode](https://github.com/codermenezes/friendlyTasks/blob/main/assets/friendlyTasksqrcode.png)
 
 friendlyTasks é um app mobile construído com o objetivo principal de praticar e desenvolver as habilidades de auto gerenciamento e melhoria contínua.
 
