@@ -20,10 +20,6 @@ O app consiste em um to do list inspirado no método Bullet Jornal(https://bulle
 # Tecnologias utilizadas
 ## Back end
 - Firebase
-
-## Implantação em produção
-- Back end: XXX
-- Front end web: Netlify
 - Banco de dados: Realtime Database NoSQL
 
 # Como executar o projeto localmente
